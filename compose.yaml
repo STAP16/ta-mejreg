@@ -1,0 +1,15 @@
+services:
+  clickhouse:
+    image: clickhouse/clickhouse-server:latest
+    container_name: ch
+    ports:
+      - "8123:8123"   # HTTP
+      - "9000:9000"   # Native
+    volumes:
+      - ch_data:/var/lib/clickhouse
+    environment:
+      - CLICKHOUSE_USER=click
+      - CLICKHOUSE_PASSWORD=click
+
+volumes:
+  ch_data:
