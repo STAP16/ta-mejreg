@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS silver_detections (
-	id UInt32,
+	id UUID DEFAULT generateUUIDv4(),
 	timestamp DateTime64(3),
 	camera_id String,
 	track_id UInt32,
