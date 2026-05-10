@@ -24,6 +24,7 @@ def build_mart():
 			GROUP BY toStartOfMinute(timestamp), camera_id, direction
 		"""
 		print("Витрина пустая - грузим всё.")
+		client.command(sql)
 	else: 
 		sql = f"""
 			INSERT INTO v_current_load (minute, camera_id, direction, vehicle_count, avg_speed, density)
@@ -35,10 +36,10 @@ def build_mart():
 				avg(speed_kmh) as avg_speed,
 				uniqExact(track_id) / 0.5 as density
 			FROM silver_detections
-			WHERE timestamp > '{last_minute}'
+			WHERE toStartOfMinute(timestamp) > '{last_minute}'
 			GROUP BY toStartOfMinute(timestamp), camera_id, direction
 		"""
+		client.command(sql)
 		print(f"Инкремент с {last_minute}")
-	client.command(sql)
 	result = client.query("SELECT count() FROM v_current_load")
 	print(f"В витрине {result.result_rows[0][0]} строк")
