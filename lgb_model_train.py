@@ -1,10 +1,9 @@
 
-import pandas as pd, numpy as np, lightgbm as lgb
+import pandas as pd, lightgbm as lgb
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 import joblib
 import matplotlib.pyplot as plt
 from clickhouse_connect import get_client
-import pandas as pd
 
 # client = get_client(password="click", username="click", host="localhost", port=8123)
 
